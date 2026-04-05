@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
 import type { Movie } from "../../types/movie.ts";
 import {
@@ -14,7 +14,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import ReactPaginateModule from "react-paginate";
 import type { ReactPaginateProps } from "react-paginate";
 import css from "./App.module.css";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 type ModuleWithDefault<T> = { default: T };
 
 const ReactPaginate = (
@@ -54,6 +54,12 @@ export default function App() {
   const hasNoResults =
     query.trim() !== "" && !isLoading && !isError && movies.length === 0;
 
+  useEffect(() => {
+    if (hasNoResults) {
+      toast.error("No movies were found for your request.");
+    }
+  }, [hasNoResults]);
+
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
@@ -72,9 +78,6 @@ export default function App() {
       )}
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
-      {hasNoResults && (
-        <ErrorMessage message="No movies were found for your request." />
-      )}
       {movies.length > 0 && !isLoading && (
         <MovieGrid movies={movies} onSelect={handleSelectMovie} />
       )}
