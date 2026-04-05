@@ -12,6 +12,7 @@ export interface FetchMoviesResponse {
 }
 
 const token = import.meta.env.VITE_TMDB_TOKEN;
+console.log("TOKEN EXISTS:", Boolean(import.meta.env.VITE_TMDB_TOKEN));
 
 export const fetchMovies = async (
   query: string,
