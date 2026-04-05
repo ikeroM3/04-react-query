@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Movie } from "../types/types.ts";
+import type { Movie } from "../types/movie.ts";
 
 interface FetchMoviesApiResponse {
   results: Movie[];
@@ -12,7 +12,6 @@ export interface FetchMoviesResponse {
 }
 
 const token = import.meta.env.VITE_TMDB_TOKEN;
-console.log("TOKEN EXISTS:", Boolean(import.meta.env.VITE_TMDB_TOKEN));
 
 export const fetchMovies = async (
   query: string,

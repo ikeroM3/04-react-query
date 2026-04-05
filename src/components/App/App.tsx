@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ComponentType } from "react";
-import type { Movie } from "../../types/types.ts";
+import type { Movie } from "../../types/movie.ts";
 import {
   fetchMovies,
   type FetchMoviesResponse,
